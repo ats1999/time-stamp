@@ -39,11 +39,11 @@ import {
                   bg: 'red.400',
                   zIndex: -1,
                 }}>
-                Write once,
+                Track the time,
               </Text>
               <br />
               <Text as={'span'} color={'red.400'}>
-                use everywhere!
+                 everywhere!
               </Text>
             </Heading>
             <Text color={'gray.500'}>

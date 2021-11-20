@@ -14,6 +14,7 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  Avatar
 } from "@chakra-ui/react";
 
 import {
@@ -28,7 +29,6 @@ import { useSession, signIn, signOut } from "next-auth/react";
 export default function WithSubnavigation({ children }) {
   const { isOpen, onToggle } = useDisclosure();
   const session = useSession();
-  console.log(session);
   return (
     <Box>
       <Flex
@@ -57,14 +57,7 @@ export default function WithSubnavigation({ children }) {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
-          >
-            Logo
-          </Text>
-
+          <Avatar size="sm" name={session?.data?.user?.name} src={session?.data?.user?.image}/>
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
