@@ -4,7 +4,7 @@ button {
 }
 
 .blink_timer {
-  animation: blink 1s linear infinite;
+  animation: blink 1s alternate infinite;
 }
 
 @keyframes blink {
@@ -25,5 +25,6 @@ button {
   }
   100% {
     opacity: 1;
+    /* transform: scale(2) */
   }
 }

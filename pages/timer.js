@@ -1,19 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
-import {
-  VStack,
-  useColorModeValue,
-  Text,
-  Button,
-  HStack,
-} from "@chakra-ui/react";
+import { VStack, useColorModeValue, Text, Button } from "@chakra-ui/react";
 
 import { useRouter } from "next/router";
-
 import CompoundTimer from "react-compound-timer";
+import axios from "axios";
+
 export default function Timer() {
   const router = useRouter();
-  const [paused, setPaused] = useState(true);
+  const timerRef = useRef(null);
+  const [paused, setPaused] = useState(false);
+  const [submitIng, setSubmitIng] = useState(false);
+
+  const submitTagTimer = () => {
+    setSubmitIng(true);
+    axios
+      .post("/api/timer", {
+        tag: router.query.tag,
+        time: timerRef.current.getTime(),
+      })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err))
+      .finally(() => setSubmitIng(false));
+  };
   return (
     <VStack
       w="400px"
@@ -30,7 +39,7 @@ export default function Timer() {
       pos={"relative"}
       zIndex={1}
     >
-      <CompoundTimer initialTime={0}>
+      <CompoundTimer ref={timerRef} initialTime={0}>
         {({ start, resume, pause, stop, reset, timerState }) => (
           <React.Fragment>
             <Text
@@ -78,6 +87,8 @@ export default function Timer() {
         _focus={{
           bg: "green.500",
         }}
+        onClick={submitTagTimer}
+        isLoading={submitIng}
       >
         Save for {router.query.tag}
       </Button>
