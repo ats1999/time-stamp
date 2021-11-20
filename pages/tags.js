@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { VStack, Button, Heading } from "@chakra-ui/react";
+import { VStack, Button, Heading, LightMode } from "@chakra-ui/react";
 import CreatableSelect from "react-select/creatable";
 import axios from "axios";
 import Link from "next/link";
@@ -40,20 +40,28 @@ export default function Tags() {
         {" "}
         Select a TAG to get started
       </Heading>
-      <CreatableSelect
-        onChange={setSelectedTag}
-        onCreateOption={createTag}
-        options={tags.map((tag) => {
-          return {
-            value: tag,
-            label: tag,
-          };
-        })}
-        isLoading={loading}
-      />
+      <LightMode>
+        <CreatableSelect
+          onChange={setSelectedTag}
+          onCreateOption={createTag}
+          options={tags.map((tag) => {
+            return {
+              value: tag,
+              label: tag,
+            };
+          })}
+          isLoading={loading}
+        />
+      </LightMode>
+
       <Link href={`/timer?tag=${selectedTag?.value}`}>
         <a>
-          <Button isFullWidth colorScheme="green" variant="solid" disabled={!selectedTag}>
+          <Button
+            isFullWidth
+            colorScheme="green"
+            variant="solid"
+            disabled={!selectedTag}
+          >
             GO
           </Button>
         </a>

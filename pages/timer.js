@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-import { VStack, useColorModeValue, Text, Button } from "@chakra-ui/react";
+import { VStack, useColorModeValue, Text, Button, } from "@chakra-ui/react";
 
 import { useRouter } from "next/router";
 import CompoundTimer from "react-compound-timer";

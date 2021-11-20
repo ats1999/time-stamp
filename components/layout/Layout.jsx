@@ -7,14 +7,13 @@ import {
   Stack,
   Collapse,
   Icon,
-  Link,
   Popover,
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
-  Avatar
+  Avatar,
 } from "@chakra-ui/react";
 
 import {
@@ -25,6 +24,7 @@ import {
 } from "@chakra-ui/icons";
 
 import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function WithSubnavigation({ children }) {
   const { isOpen, onToggle } = useDisclosure();
@@ -57,10 +57,19 @@ export default function WithSubnavigation({ children }) {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Avatar size="sm" name={session?.data?.user?.name} src={session?.data?.user?.image}/>
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
+          <Link href="/">
+            <a>
+              <Avatar
+                size="sm"
+                name={session?.data?.user?.name}
+                src={session?.data?.user?.image}
+              />
+            </a>
+          </Link>
+
+          {/* <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
-          </Flex>
+          </Flex> */}
         </Flex>
 
         <Stack
@@ -88,9 +97,9 @@ export default function WithSubnavigation({ children }) {
         </Stack>
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity>
+      {/* <Collapse in={isOpen} animateOpacity>
         <MobileNav />
-      </Collapse>
+      </Collapse> */}
 
       {children}
     </Box>

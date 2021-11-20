@@ -7,7 +7,7 @@ import "../styles/global.css";
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   useEffect(() => {
     try {
-      localStorage.setItem("chakra-ui-color-mode", "dark");
+      // localStorage.setItem("chakra-ui-color-mode", "dark");
     } catch (e) {
       console.log(e);
     }
