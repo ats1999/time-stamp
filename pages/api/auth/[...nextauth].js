@@ -1,15 +1,22 @@
-import NextAuth from "next-auth"
-import GithubProvider from "next-auth/providers/github"
-import Auth0Provider from "next-auth/providers/auth0";
-import GoogleProvider from 'next-auth/providers/google'
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 
-console.log(process.env.GOOGLE_CLIENT_SECRET)
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
-    })
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
   ],
-})
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      return true;
+    },
+    async session({ session, token, user }) {
+      console.log("Session is called.")
+      session.name = "Rahul..";
+      return session;
+    },
+  },
+});
