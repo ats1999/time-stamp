@@ -72,7 +72,5 @@ export default function Today() {
       },
     ],
   };
-  console.log(data.map((d) => d.time));
-  if (data.length == 0) return null;
   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }
