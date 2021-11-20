@@ -1,0 +1,34 @@
+{
+  "name": "time-stamp",
+  "version": "1.0.0",
+  "description": "Track your time",
+  "main": "index.js",
+  "scripts": {
+    "test": "tst",
+    "dev": "next dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ats1999/time-stamp.git"
+  },
+  "keywords": [
+    "time"
+  ],
+  "author": "Rahul",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ats1999/time-stamp/issues"
+  },
+  "homepage": "https://github.com/ats1999/time-stamp#readme",
+  "dependencies": {
+    "@chakra-ui/icons": "^1.1.1",
+    "@chakra-ui/react": "^1.7.2",
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "framer-motion": "^4.1.17",
+    "next": "^12.0.4",
+    "next-auth": "^4.0.0-beta.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
