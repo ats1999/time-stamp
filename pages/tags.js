@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { VStack, Button, Heading } from "@chakra-ui/react";
 import CreatableSelect from "react-select/creatable";
 import axios from "axios";
+import Link from "next/link";
 
 export default function Tags() {
   const [tags, setTags] = useState([]);
@@ -50,9 +51,13 @@ export default function Tags() {
         })}
         isLoading={loading}
       />
-      <Button colorScheme="green" variant="solid"disabled={!selectedTag}>
-        GO
-      </Button>
+      <Link href={`/timer?tag=${selectedTag?.value}`}>
+        <a>
+          <Button isFullWidth colorScheme="green" variant="solid" disabled={!selectedTag}>
+            GO
+          </Button>
+        </a>
+      </Link>
     </VStack>
   );
 }
