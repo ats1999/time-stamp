@@ -19,7 +19,12 @@ export default function Timer() {
         tag: router.query.tag,
         time: timerRef.current.getTime(),
       })
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        console.log(res.data);
+        timerRef.current.reset();
+        timerRef.current.pause();
+        setPaused(true)
+      })
       .catch((err) => console.log(err))
       .finally(() => setSubmitIng(false));
   };
