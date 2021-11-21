@@ -59,11 +59,28 @@ export default function WithSubnavigation({ children }) {
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <Link href="/">
             <a>
-              <Avatar
-                size="sm"
-                name={session?.data?.user?.name}
-                src={session?.data?.user?.image}
-              />
+              {session?.data ? (
+                <Avatar
+                  size="sm"
+                  name={session?.data?.user?.name}
+                  src={session?.data?.user?.image}
+                />
+              ) : (
+                <Button
+                  display={{ base: "none", md: "inline-flex" }}
+                  fontSize={"sm"}
+                  fontWeight={600}
+                  color={"white"}
+                  bg={"pink.400"}
+                  href={"#"}
+                  _hover={{
+                    bg: "pink.300",
+                  }}
+                  onClick={() => signIn()}
+                >
+                  Sign In
+                </Button>
+              )}
             </a>
           </Link>
 
@@ -72,7 +89,7 @@ export default function WithSubnavigation({ children }) {
           </Flex> */}
         </Flex>
 
-        <Stack
+        {/* <Stack
           flex={{ base: 1, md: 0 }}
           justify={"flex-end"}
           direction={"row"}
@@ -94,12 +111,12 @@ export default function WithSubnavigation({ children }) {
               Sign Up
             </Button>
           )}
-        </Stack>
+        </Stack> */}
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity>
+      {/* <Collapse in={isOpen} animateOpacity>
         <MobileNav />
-      </Collapse>
+      </Collapse> */}
 
       {children}
     </Box>
@@ -116,7 +133,7 @@ const DesktopNav = () => {
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
-            <PopoverTrigger>
+            {/* <PopoverTrigger>
               <Link
                 p={2}
                 href={navItem.href ?? "#"}
@@ -130,7 +147,7 @@ const DesktopNav = () => {
               >
                 {navItem.label}
               </Link>
-            </PopoverTrigger>
+            </PopoverTrigger> */}
 
             {navItem.children && (
               <PopoverContent
