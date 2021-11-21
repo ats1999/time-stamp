@@ -48,7 +48,7 @@ export default async function tag(req, res) {
   } else {
     const latestTimer = await Timers.findOne({
       userId: userId,
-      date: req.query.date || new Date().toLocaleDateString(),
+      date: new Date(req.query.date).toLocaleDateString(),
     });
     res.send(latestTimer?.timerTags || []);
   }

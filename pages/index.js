@@ -6,6 +6,7 @@ export default function Home() {
   const [date, setDate] = useState(
     new Date().toLocaleDateString().split("/").reverse().join("-")
   );
+
   return (
     <div>
       <Box p={1}>
@@ -17,7 +18,7 @@ export default function Home() {
           w="200px"
         />
       </Box>
-      <Aday date={date}/>
+      <Aday date={new Date(date).getTime()}/>
       <Hero />
     </div>
   );

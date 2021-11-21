@@ -7,14 +7,14 @@ export default function Today({ date }) {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get(`/api/timer?date=${date?.split("-").reverse().join("/")}`)
+      .get(`/api/timer?date=${date}`)
       .then((res) => {
         setData(res.data);
 
         // if the data is empty and the date is current date, then show alert
         if (
           res.data.length == 0 &&
-          date != new Date().toLocaleDateString().split("/").reverse().join("-")
+          new Date(date).toLocaleDateString() != new Date().toLocaleDateString()
         )
           alert("There is no data on date selected date");
       })
@@ -44,9 +44,9 @@ export default function Today({ date }) {
     },
     title: {
       text: `${
-        date?.split("-").reverse().join("/") == new Date().toLocaleDateString()
+        new Date(date).toLocaleDateString() == new Date().toLocaleDateString()
           ? "Today's"
-          : date?.split("-").reverse().join("/")
+          : new Date(date).toLocaleDateString()
       } stats`,
     },
     subtitle: {
@@ -75,10 +75,10 @@ export default function Today({ date }) {
     series: [
       {
         name: `${
-          date?.split("-").reverse().join("/") ==
+          new Date(date).toLocaleDateString() ==
           new Date().toLocaleDateString()
             ? "Today's"
-            : date?.split("-").reverse().join("/")
+            : new Date(date).toLocaleDateString()
         } stats`,
         pointWidth: 30,
         marker: {
