@@ -15,12 +15,19 @@ export default NextAuth({
       return true;
     },
     async session({ session }) {
+      if (!session) return session;
+
+      // connect DB
       await DB();
-      const isUser = await User.findOne({ email: session.user.email });
+
+      // check if the user is already present or not
+      const isUser = await User.findOne({ email: session?.user?.email });
       if (isUser) {
         session.user._id = isUser._id;
         return session;
       }
+
+      // create a new user
       const user = new User({
         email: session.user.email,
         image: session.user.image,
@@ -32,5 +39,5 @@ export default NextAuth({
       return session;
     },
   },
-  debug:true
+  debug: true,
 });
