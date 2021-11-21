@@ -40,5 +40,5 @@ export default NextAuth({
     },
   },
   debug: true,
-  secret:"Rahul=kumar123213"
+  secret: process.env.SECRET,
 });
