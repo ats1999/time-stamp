@@ -76,7 +76,7 @@ export default function WithSubnavigation({ children }) {
                   _hover={{
                     bg: "pink.300",
                   }}
-                  onClick={() => signIn()}
+                  onClick={() => signIn("google")}
                 >
                   Sign In
                 </Button>
