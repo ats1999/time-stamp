@@ -4,9 +4,9 @@ export default function handler(req, res) {
   const uri = process.env.MONGO_URI;
   const url = process.env.NEXTAUTH_URL;
   res.status(200).send({
-    clientId: "OK",
-    clientSecret: "OK",
-    uri: "OK",
+    GOOGLE_CLIENT_ID: "OK",
+    GOOGLE_CLIENT_SECRET: "OK",
+    MONGO_URI: "OK",
     NEXTAUTH_URL: url,
   });
 }
