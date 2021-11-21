@@ -48,10 +48,10 @@ export default async function tag(req, res) {
   } else {
     console.log("req.date: ", new Date(req.query.date).toLocaleDateString());
     console.log("new.date: ", new Date().toLocaleDateString());
-    
+
     const latestTimer = await Timers.findOne({
       userId: userId,
-      date: new Date(req.query.date).toLocaleDateString(),
+      date: new Date(Number(req.query.date)).toLocaleDateString(),
     });
     res.send(latestTimer?.timerTags || []);
   }
