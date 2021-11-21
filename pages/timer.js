@@ -49,7 +49,7 @@ export default function Timer() {
           <React.Fragment>
             <Text
               className={paused ? "blink_timer" : ""}
-              fontSize="70px"
+              fontSize="50px"
               textAlign="center"
             >
               <CompoundTimer.Hours /> : <CompoundTimer.Minutes /> :{" "}
