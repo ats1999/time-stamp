@@ -69,7 +69,7 @@ export default function Today({ date }) {
     },
     tooltip: {
       formatter: function () {
-        return this.y;
+        return `${this.y} hours`;
       },
     },
     series: [
