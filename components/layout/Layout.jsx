@@ -97,9 +97,9 @@ export default function WithSubnavigation({ children }) {
         </Stack>
       </Flex>
 
-      {/* <Collapse in={isOpen} animateOpacity>
+      <Collapse in={isOpen} animateOpacity>
         <MobileNav />
-      </Collapse> */}
+      </Collapse>
 
       {children}
     </Box>
