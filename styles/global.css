@@ -12,19 +12,22 @@ button {
     opacity: 0;
   }
   20% {
-    opacity: 0.2;
-  }
-  40% {
     opacity: 0.4;
   }
-  60% {
+  40% {
     opacity: 0.6;
   }
-  80% {
+  50% {
+    opacity: 1;
+  }
+  70% {
     opacity: 0.8;
   }
-  100% {
-    opacity: 1;
+  80% {
+    opacity: 0.6;
     /* transform: scale(2) */
+  }
+  90%{
+    opacity: 0.2;
   }
 }
