@@ -40,5 +40,5 @@ export default NextAuth({
     },
   },
   debug: true,
-  secret: process.env.SECRET,
+  secret: process.env.SECRET || "123",
 });
