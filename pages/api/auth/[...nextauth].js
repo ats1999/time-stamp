@@ -40,4 +40,5 @@ export default NextAuth({
     },
   },
   debug: true,
+  secret:"Rahul=kumar123213"
 });
