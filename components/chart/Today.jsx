@@ -46,7 +46,7 @@ export default function Today() {
     },
     yAxis: {
       title: {
-        text: "",
+        text: "Hours",
       },
       labels: {
         formatter: function () {
