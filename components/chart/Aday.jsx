@@ -9,7 +9,7 @@ export default function Today({ date }) {
     axios
       .get(`/api/timer?date=${date}`)
       .then((res) => {
-        setData(res.data);
+        setData(res.data.sort((prev, cur) => cur.time - prev.time));
 
         // if the data is empty and the date is current date, then show alert
         if (
@@ -75,8 +75,7 @@ export default function Today({ date }) {
     series: [
       {
         name: `${
-          new Date(date).toLocaleDateString() ==
-          new Date().toLocaleDateString()
+          new Date(date).toLocaleDateString() == new Date().toLocaleDateString()
             ? "Today's"
             : new Date(date).toLocaleDateString()
         } stats`,
