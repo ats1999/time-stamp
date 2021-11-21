@@ -31,3 +31,8 @@ button {
     opacity: 0.2;
   }
 }
+
+
+#attribution_block{
+  display:none;
+}
