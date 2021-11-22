@@ -15,12 +15,15 @@ export default async function tag(req, res) {
   if (!session) return res.status(401).send("Login first!");
 
   const userId = session.user._id;
-  const { time, tag } = req.body;
+  const { time, tag, date } = req.body;
 
   if (req.method === "POST") {
     const latestTimer = await Timers.findOne({
       userId: userId,
-      date: getDateString(new Date()),
+
+      // if user prodided the back date, then insert into back date
+      // otherwise insert into current date
+      date: getDateString(date ? Number(date) : new Date()),
     });
 
     // create a timer for today

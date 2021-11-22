@@ -61,8 +61,22 @@ export default function Tags() {
             colorScheme="green"
             variant="solid"
             disabled={!selectedTag}
+            size="sm"
           >
             GO
+          </Button>
+        </a>
+      </Link>
+      <Link href={`/back-date?tag=${selectedTag?.value}`}>
+        <a>
+          <Button
+            isFullWidth
+            colorScheme="green"
+            variant="outline"
+            disabled={!selectedTag}
+            size="sm"
+          >
+            Back Date
           </Button>
         </a>
       </Link>

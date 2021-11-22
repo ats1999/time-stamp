@@ -69,7 +69,7 @@ export default function Today({ date }) {
     },
     tooltip: {
       formatter: function () {
-        return `${this.y} hours`;
+        return this.y >= 1 ? `${this.y.toFixed(2)} hours` : `${(this.y * 60).toFixed(2)} minutes`;
       },
     },
     series: [
