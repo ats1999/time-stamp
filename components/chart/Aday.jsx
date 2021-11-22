@@ -50,7 +50,11 @@ export default function Today({ date }) {
       } stats`,
     },
     subtitle: {
-      text: "",
+      text:
+        (
+          data.reduce((prev, cur) => prev + cur.time, 0) /
+          (1000 * 60 * 60)
+        ).toFixed(2) + " hours total",
     },
     xAxis: {
       min: 0,
@@ -69,7 +73,9 @@ export default function Today({ date }) {
     },
     tooltip: {
       formatter: function () {
-        return this.y >= 1 ? `${this.y.toFixed(2)} hours` : `${(this.y * 60).toFixed(2)} minutes`;
+        return this.y >= 1
+          ? `${this.y.toFixed(2)} hours`
+          : `${(this.y * 60).toFixed(2)} minutes`;
       },
     },
     series: [
