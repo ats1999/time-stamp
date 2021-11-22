@@ -2,6 +2,12 @@ import Timers from "modals/Timers";
 import DB from "lib/db";
 import { getSession } from "next-auth/react";
 
+// return dd/mm/yyyy
+const getDateString = (dateStr) => {
+  const date = new Date(dateStr);
+  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+};
+
 export default async function tag(req, res) {
   await DB();
   const session = await getSession({ req });
@@ -14,14 +20,14 @@ export default async function tag(req, res) {
   if (req.method === "POST") {
     const latestTimer = await Timers.findOne({
       userId: userId,
-      date: new Date().toLocaleDateString(),
+      date: getDateString(new Date()),
     });
 
     // create a timer for today
     if (!latestTimer) {
       const timer = new Timers({
         userId,
-        date: new Date().toLocaleDateString(),
+        date: getDateString(new Date()),
         timeStamp: Date.now(),
         timerTags: [{ tag, time }],
       });
@@ -46,12 +52,9 @@ export default async function tag(req, res) {
     }
     res.send("OK");
   } else {
-    console.log("req.date: ", new Date(req.query.date).toLocaleDateString());
-    console.log("new.date: ", new Date().toLocaleDateString());
-
     const latestTimer = await Timers.findOne({
       userId: userId,
-      date: new Date(Number(req.query.date)).toLocaleDateString(),
+      date: getDateString(Number(req.query.date)),
     });
     res.send(latestTimer?.timerTags || []);
   }
