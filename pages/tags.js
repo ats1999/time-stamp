@@ -74,7 +74,6 @@ export default function Tags() {
             colorScheme="green"
             variant="outline"
             disabled={!selectedTag}
-            size="sm"
           >
             Back Date
           </Button>
