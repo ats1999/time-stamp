@@ -1,6 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-import { VStack, useColorModeValue, Text, Button, } from "@chakra-ui/react";
+import { VStack, useColorModeValue, Text, Button } from "@chakra-ui/react";
 
 import { useRouter } from "next/router";
 import CompoundTimer from "react-compound-timer";
@@ -23,11 +23,17 @@ export default function Timer() {
         console.log(res.data);
         timerRef.current.reset();
         timerRef.current.pause();
-        setPaused(true)
+        setPaused(true);
       })
       .catch((err) => console.log(err))
       .finally(() => setSubmitIng(false));
   };
+
+  useEffect(() => {
+    window.onbeforeunload = function (e) {
+      if (timerRef.current.getTime()) return "Do you want to lose this time?";
+    };
+  }, []);
   return (
     <VStack
       w="400px"
