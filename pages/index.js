@@ -15,7 +15,7 @@ export default function Home() {
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          max={`${curDate.getFullYear()}-${curDate.getMonth()+1}-${curDate.getDate()}`}
+          // max={`${curDate.getFullYear()}-${curDate.getMonth()+1}-${curDate.getDate()}`}
           w="200px"
         />
       </Box>
