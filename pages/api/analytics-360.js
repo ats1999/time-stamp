@@ -13,8 +13,10 @@ export default async function tag(req, res) {
 
     const data = {
       timeSeries: [],
+      totalDays: timers.length,
     };
 
+    // track the total hours each day
     data.timeSeries = timers.map((timer) => {
       const totalMs = timer.timerTags.reduce(
         (total, cur) => total + cur.time,
@@ -23,6 +25,17 @@ export default async function tag(req, res) {
 
       return [timer.timeStamp, Number((totalMs / (1000 * 60 * 60)).toFixed(2))];
     });
+
+    // total hours worked since started
+    data.totalHours = data.timeSeries
+      .reduce((total, cur) => {
+        return total + cur[1];
+      }, 0)
+      .toFixed(2);
+
+    // avg hours each day
+    data.avgHours = (data.totalHours / data.totalDays).toFixed(2);
+
     res.send(data);
   } catch (e) {
     console.log(e);

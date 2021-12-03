@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
+import AnalyticsComponent from "../components/chart/Analytics";
 
 // https://stackoverflow.com/questions/11396628/highcharts-datetime-axis-how-to-disable-time-part-show-only-dates
 // https://www.highcharts.com/forum/viewtopic.php?t=42696
@@ -12,7 +13,8 @@ export default function Analytics() {
     axios
       .get("/api/analytics-360")
       .then((res) => {
-        setData(res.data.timeSeries);
+        console.log(res.data);
+        setData(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -31,7 +33,7 @@ export default function Analytics() {
       text: "Pinch the chart to zoom in",
     },
     xAxis: {
-      type: "datetime"
+      type: "datetime",
     },
     yAxis: {
       title: {
@@ -52,7 +54,7 @@ export default function Analytics() {
       {
         type: "area",
         name: "Hour",
-        data: data,
+        data: data.timeSeries,
       },
     ],
   };
@@ -60,6 +62,7 @@ export default function Analytics() {
   return (
     <Box>
       <Heading textAlign="center">Your time analytics</Heading>
+      <AnalyticsComponent />
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
     </Box>
   );
