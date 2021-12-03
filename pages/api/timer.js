@@ -16,7 +16,6 @@ export default async function tag(req, res) {
 
   const userId = session.user._id;
   const { time, tag, date } = req.body;
-  console.log(date,getDateString(date ? Number(date) : new Date()))
   if (req.method === "POST") {
     const latestTimer = await Timers.findOne({
       userId: userId,
