@@ -25,10 +25,13 @@ export default function Analytics() {
       text: "Your time tracked over the time",
     },
     subtitle: {
-      text:"Pinch the chart to zoom in",
+      text: "Pinch the chart to zoom in",
     },
     xAxis: {
       type: "datetime",
+      labels: {
+        enabled: false,
+      },
     },
     yAxis: {
       title: {
@@ -41,6 +44,15 @@ export default function Analytics() {
 
     series: [
       {
+        dataLabels: {
+          enabled: true,
+          format: "{point.x:%b %e}",
+          verticalAlign: "bottom",
+          inside: true,
+          overflow: false,
+          crop: false,
+          y: 25,
+        },
         type: "area",
         name: "Hour",
         data: data,
