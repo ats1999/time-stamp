@@ -74,6 +74,21 @@ export default function Hero() {
                 </Button>
               </a>
             </Link>
+            <Link href="/analytics">
+              <a>
+                <Button
+                  rounded={"full"}
+                  size={"lg"}
+                  fontWeight={"normal"}
+                  px={6}
+                  colorScheme={"green"}
+                  bg={"green.400"}
+                  _hover={{ bg: "green.500" }}
+                >
+                  Analytics 📈
+                </Button>
+              </a>
+            </Link>
           </Stack>
         </Stack>
         <Flex
@@ -100,7 +115,11 @@ export default function Hero() {
             width={"full"}
             overflow={"hidden"}
           >
-            <iframe width="100%" height="100%" src="https://embed.lottiefiles.com/animation/67011"></iframe>
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://embed.lottiefiles.com/animation/67011"
+            ></iframe>
           </Box>
         </Flex>
       </Stack>
