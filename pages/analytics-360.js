@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 
+// https://stackoverflow.com/questions/11396628/highcharts-datetime-axis-how-to-disable-time-part-show-only-dates
+// https://www.highcharts.com/forum/viewtopic.php?t=42696
 export default function Analytics() {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -29,7 +31,7 @@ export default function Analytics() {
       text: "Pinch the chart to zoom in",
     },
     xAxis: {
-      type: "datetime",
+      type: "datetime"
     },
     yAxis: {
       title: {
