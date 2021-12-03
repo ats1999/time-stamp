@@ -21,7 +21,7 @@ export default async function tag(req, res) {
         0
       );
 
-      return [timer.timeStamp, (totalMs / (1000 * 60 * 60)).toFixed(2)];
+      return [timer.timeStamp, Number((totalMs / (1000 * 60 * 60)).toFixed(2))];
     });
     res.send(data);
   } catch (e) {
