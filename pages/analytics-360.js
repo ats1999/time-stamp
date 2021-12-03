@@ -39,7 +39,13 @@ export default function Analytics() {
     legend: {
       enabled: false,
     },
-
+    tooltip: {
+      formatter: function () {
+        return this.y >= 1
+          ? `${this.y.toFixed(2)} hours`
+          : `${(this.y * 60).toFixed(2)} minutes`;
+      },
+    },
     series: [
       {
         type: "area",
