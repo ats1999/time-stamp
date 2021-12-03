@@ -17,6 +17,7 @@ export default function Analytics() {
         alert("Server error");
       });
   }, []);
+
   const chartOptions = {
     chart: {
       zoomType: "x",
@@ -25,7 +26,7 @@ export default function Analytics() {
       text: "Your time tracked over the time",
     },
     subtitle: {
-      text:"Pinch the chart to zoom in",
+      text: "Pinch the chart to zoom in",
     },
     xAxis: {
       type: "datetime",
