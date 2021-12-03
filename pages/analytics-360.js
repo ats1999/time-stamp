@@ -62,7 +62,7 @@ export default function Analytics() {
   return (
     <Box>
       <Heading textAlign="center">Your time analytics</Heading>
-      <AnalyticsComponent />
+      <AnalyticsComponent {...data} />
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
     </Box>
   );
