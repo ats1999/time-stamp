@@ -74,7 +74,7 @@ export default function Hero() {
                 </Button>
               </a>
             </Link>
-            <Link href="/analytics">
+            <Link href="/analytics-360">
               <a>
                 <Button
                   rounded={"full"}
