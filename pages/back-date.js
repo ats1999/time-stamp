@@ -11,15 +11,13 @@ import {
 import { useRouter } from "next/router";
 import axios from "axios";
 
+import { to_YY_MM_DD } from "../lib/util";
+
 export default function BackDate() {
   const router = useRouter();
   const [submitIng, setSubmitIng] = useState(false);
   const [time, setTime] = useState(0);
-  const [date, setDate] = useState(
-    `${new Date().getFullYear()}-${
-      new Date().getMonth() + 1
-    }-${new Date().getDate()}`
-  );
+  const [date, setDate] = useState(to_YY_MM_DD(new Date()));
 
   const submitTagTimer = () => {
     setSubmitIng(true);
@@ -27,7 +25,7 @@ export default function BackDate() {
       .post("/api/timer", {
         tag: router.query.tag,
         time: time * 60 * 1000,
-        date: new Date(date).getTime(),
+        date:new Date(date).getTime(),
       })
       .then((res) => {
         alert("Updated successfully");
@@ -62,6 +60,7 @@ export default function BackDate() {
       <Input
         onChange={(e) => setDate(e.target.value)}
         value={date}
+        max={to_YY_MM_DD(new Date())}
         w="100%"
         type="date"
       />

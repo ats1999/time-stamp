@@ -16,7 +16,7 @@ export default async function tag(req, res) {
 
   const userId = session.user._id;
   const { time, tag, date } = req.body;
-
+  console.log(date,getDateString(date ? Number(date) : new Date()))
   if (req.method === "POST") {
     const latestTimer = await Timers.findOne({
       userId: userId,
@@ -30,7 +30,7 @@ export default async function tag(req, res) {
     if (!latestTimer) {
       const timer = new Timers({
         userId,
-        date: getDateString(new Date()),
+        date: getDateString(date ? Number(date) : new Date()),
         timeStamp: Date.now(),
         timerTags: [{ tag, time }],
       });

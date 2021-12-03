@@ -13,7 +13,7 @@ export default function Home() {
       <Box p={1}>
         <Input
           type="date"
-          value={"2021-12-03"}
+          value={date}
           onChange={(e) => setDate(e.target.value)}
           max={to_YY_MM_DD(new Date())}
           w="200px"
