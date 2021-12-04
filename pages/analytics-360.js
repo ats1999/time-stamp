@@ -1,4 +1,4 @@
-import { Heading, Box } from "@chakra-ui/react";
+import { Heading, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
@@ -95,14 +95,13 @@ export default function Analytics() {
   }, []);
 
   return (
-    <Box>
+    <VStack alignItems="left">
       <Heading textAlign="center">Your time analytics</Heading>
       <AnalyticsComponent {...data} />
       <HighchartsReact
         highcharts={Highcharts}
         options={chartOptionsCreator(data)}
       />
-      ;
-    </Box>
+    </VStack>
   );
 }
