@@ -31,7 +31,7 @@ export default async function tag(req, res) {
         userId,
         date: getDateString(date ? Number(date) : new Date()),
         timeStamp: Date.now(),
-        timerTags: [{ tag?.toLowerCase(), time }],
+        timerTags: [{ tag:tag?.toLowerCase(), time }],
       });
 
       await timer.save();
@@ -44,7 +44,7 @@ export default async function tag(req, res) {
       if (curTagIdx != -1) {
         latestTimer.timerTags[curTagIdx].time += time;
       } else {
-        latestTimer.timerTags.push({ tag?.toLowerCase(), time });
+        latestTimer.timerTags.push({ tag:tag?.toLowerCase(), time });
       }
 
       await Timers.findOneAndUpdate(
