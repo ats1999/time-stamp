@@ -25,7 +25,7 @@ const chartOptionsCreator = (data) => {
       text: "Your entire time track",
     },
     subtitle: {
-      text: "The below chart contains the time from the day you started with us :)",
+      text: "Drag chart to see more :)",
     },
     xAxis: {
       categories:
