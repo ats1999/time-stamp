@@ -31,20 +31,20 @@ export default async function tag(req, res) {
         userId,
         date: getDateString(date ? Number(date) : new Date()),
         timeStamp: Date.now(),
-        timerTags: [{ tag, time }],
+        timerTags: [{ tag?.toLowerCase(), time }],
       });
 
       await timer.save();
     } else {
       // check if the current tag is already present or not
       const curTagIdx = latestTimer.timerTags.findIndex(
-        (timer) => timer.tag == tag
+        (timer) => timer.tag == tag?.toLowerCase()
       );
 
       if (curTagIdx != -1) {
         latestTimer.timerTags[curTagIdx].time += time;
       } else {
-        latestTimer.timerTags.push({ tag, time });
+        latestTimer.timerTags.push({ tag?.toLowerCase(), time });
       }
 
       await Timers.findOneAndUpdate(
