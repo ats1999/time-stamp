@@ -48,10 +48,10 @@ const chartOptionsCreator = (data) => {
     tooltip: {
       crosshairs: true,
       shared: true,
-      
+
       // https://stackoverflow.com/questions/6867607/want-to-sort-highcharts-tooltip-results
       formatter: function (tooltip) {
-        let items = this.points || splat(this)
+        let items = this.points || splat(this);
 
         // sort the values
         items.sort(function (a, b) {
@@ -70,6 +70,21 @@ const chartOptionsCreator = (data) => {
           lineWidth: 1,
         },
       },
+      // https://www.highcharts.com/forum/viewtopic.php?t=6399
+      // events: {
+      //   show: function () {
+      //     let chart = this.chart,
+      //       series = chart.series,
+      //       i = series.length,
+      //       otherSeries;
+      //     while (i--) {
+      //       otherSeries = series[i];
+      //       if (otherSeries != this && otherSeries.visible) {
+      //         otherSeries.hide();
+      //       }
+      //     }
+      //   },
+      // },
     },
     series:
       data?.tags.map((tag) => {
