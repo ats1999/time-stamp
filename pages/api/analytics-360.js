@@ -19,7 +19,7 @@ export default async function tag(req, res) {
     const data = {
       timeSeries: [],
       totalDays: timers.length,
-      tags:tags
+      tags:[...tags,"total","avg"]
     };
 
     const timeSeries = timers.map((timer) => {
