@@ -66,6 +66,7 @@ export default function Tags() {
             };
           })}
           isLoading={loading}
+          // https://react-select.com/home#custom-styles
           styles={{
             control: (styles) => ({ ...styles, backgroundColor: "black" }),
             option: (styles, { data, isDisabled, isFocused, isSelected }) => {

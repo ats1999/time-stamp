@@ -22,16 +22,18 @@ const chartOptionsCreator = (data) => {
       enabled: false,
     },
     title: {
-      text: "Monthly Average Temperature",
+      text: "Your entire time track",
     },
     subtitle: {
-      text: "Source: WorldClimate.com",
+      text: "The below chart contains the time from the day you started with us :)",
     },
     xAxis: {
       categories:
         data?.timeSeries.map((timer) =>
           new Date(timer.timeStamp).toDateString()
         ) || [],
+      min: 0,
+      max: 7,
     },
     yAxis: {
       title: {
@@ -46,6 +48,19 @@ const chartOptionsCreator = (data) => {
     tooltip: {
       crosshairs: true,
       shared: true,
+      
+      // https://stackoverflow.com/questions/6867607/want-to-sort-highcharts-tooltip-results
+      formatter: function (tooltip) {
+        let items = this.points || splat(this)
+
+        // sort the values
+        items.sort(function (a, b) {
+          return a.y < b.y ? -1 : a.y > b.y ? 1 : 0;
+        });
+        items.reverse();
+
+        return tooltip.defaultFormatter.call(this, tooltip);
+      },
     },
     plotOptions: {
       spline: {

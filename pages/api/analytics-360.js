@@ -19,7 +19,7 @@ export default async function tag(req, res) {
     const data = {
       timeSeries: [],
       totalDays: timers.length,
-      tags:[...tags,"total","avg"]
+      tags: [...tags, "total", "avg"],
     };
 
     const timeSeries = timers.map((timer) => {
@@ -38,7 +38,7 @@ export default async function tag(req, res) {
       return op;
     });
 
-    data.timeSeries = timeSeries;
+    data.timeSeries = timeSeries.reverse();
     data.totalHours = data.timeSeries
       .reduce((total, cur) => total + cur.total, 0)
       .toFixed(2);
