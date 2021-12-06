@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import axios from "axios";
+import { highChartsTheme } from "lib/util";
+Highcharts.theme = highChartsTheme;
+if (typeof Highcharts === "object") Highcharts.setOptions(Highcharts.theme);
+
 
 export default function Today({ date }) {
   const [data, setData] = useState([]);

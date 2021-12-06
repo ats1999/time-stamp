@@ -14,7 +14,10 @@ import {
 } from "@chakra-ui/react";
 
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+
 export default function Hero() {
+  const session = useSession();
   return (
     <Container maxW={"7xl"}>
       <Stack
@@ -69,6 +72,7 @@ export default function Hero() {
                   colorScheme={"red"}
                   bg={"red.400"}
                   _hover={{ bg: "red.500" }}
+                  disabled={!session?.data}
                 >
                   Track 🕒
                 </Button>
@@ -84,6 +88,7 @@ export default function Hero() {
                   colorScheme={"green"}
                   bg={"green.400"}
                   _hover={{ bg: "green.500" }}
+                  disabled={!session?.data}
                 >
                   Analytics 📈
                 </Button>

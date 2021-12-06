@@ -1,69 +1,187 @@
-import { Heading, Box } from "@chakra-ui/react";
+import { Heading, VStack, Button, HStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
+import AnalyticsComponent from "../components/chart/Analytics";
+import { highChartsTheme } from "lib/util";
+// https://stackoverflow.com/questions/11396628/highcharts-datetime-axis-how-to-disable-time-part-show-only-dates
+// https://www.highcharts.com/forum/viewtopic.php?t=42696
+Highcharts.theme = highChartsTheme;
+if (typeof Highcharts === "object") Highcharts.setOptions(Highcharts.theme);
 
+const chartOptionsCreator = (data) => {
+  const chartOptions = {
+    chart: {
+      type: "spline",
+      height: 300,
+      panning: true,
+      followTouchMove: true,
+    },
+    credits: {
+      enabled: false,
+    },
+    title: {
+      text: "Your entire time track",
+    },
+    subtitle: {
+      text: "Drag chart to see more :)",
+    },
+    xAxis: {
+      categories:
+        data?.timeSeries.map((timer) =>
+          new Date(timer.timeStamp).toDateString()
+        ) || [],
+      min: 0,
+      max: 7,
+    },
+    yAxis: {
+      title: {
+        text: "Hours",
+      },
+      labels: {
+        formatter: function () {
+          return this.value + " hr";
+        },
+      },
+    },
+    tooltip: {
+      crosshairs: true,
+      shared: true,
+
+      // https://stackoverflow.com/questions/6867607/want-to-sort-highcharts-tooltip-results
+      formatter: function (tooltip) {
+        let items = this.points || splat(this);
+
+        // sort the values
+        items.sort(function (a, b) {
+          return a.y < b.y ? -1 : a.y > b.y ? 1 : 0;
+        });
+        items.reverse();
+
+        return tooltip.defaultFormatter.call(this, tooltip);
+      },
+    },
+    plotOptions: {
+      spline: {
+        marker: {
+          radius: 4,
+          lineColor: "#666666",
+          lineWidth: 1,
+        },
+      },
+      // https://www.highcharts.com/forum/viewtopic.php?t=6399
+      // events: {
+      //   show: function () {
+      //     let chart = this.chart,
+      //       series = chart.series,
+      //       i = series.length,
+      //       otherSeries;
+      //     while (i--) {
+      //       otherSeries = series[i];
+      //       if (otherSeries != this && otherSeries.visible) {
+      //         otherSeries.hide();
+      //       }
+      //     }
+      //   },
+      // },
+    },
+    series:
+      data?.tags.map((tag) => {
+        return {
+          name: tag,
+          marker: {
+            symbol: "square",
+          },
+          data: data.timeSeries.map((timer) => {
+            if (timer[tag] >= 5)
+              return {
+                y: timer[tag],
+                marker: {
+                  symbol:
+                    "url(https://www.highcharts.com/samples/graphics/sun.png)",
+                },
+              };
+            return timer[tag];
+          }),
+        };
+      }) || [],
+  };
+
+  return chartOptions;
+};
 export default function Analytics() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
+  const [timeLine, setTimeLine] = useState("all");
+  const [showTag, setShowTag] = useState("all");
+
   useEffect(() => {
     axios
       .get("/api/analytics-360")
       .then((res) => {
-        setData(res.data.timeSeries);
+        setData(res.data);
       })
       .catch((err) => {
         console.log(err);
         alert("Server error");
       });
   }, []);
-  const chartOptions = {
-    chart: {
-      zoomType: "x",
-    },
-    title: {
-      text: "Your time tracked over the time",
-    },
-    subtitle: {
-      text: "Pinch the chart to zoom in",
-    },
-    xAxis: {
-      type: "datetime",
-      labels: {
-        enabled: false,
-      },
-    },
-    yAxis: {
-      title: {
-        text: "Hours",
-      },
-    },
-    legend: {
-      enabled: false,
-    },
-
-    series: [
-      {
-        dataLabels: {
-          enabled: true,
-          format: "{point.x:%b %e}",
-          verticalAlign: "bottom",
-          inside: true,
-          overflow: false,
-          crop: false,
-          y: 25,
-        },
-        type: "area",
-        name: "Hour",
-        data: data,
-      },
-    ],
-  };
 
   return (
-    <Box>
+    <VStack alignItems="left">
       <Heading textAlign="center">Your time analytics</Heading>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
-    </Box>
+      <HStack alignSelf="center" p={1} flexWrap="wrap">
+        {[
+          "all",
+          "this-week",
+          "last-week",
+          "this-month",
+          "last-month",
+          "this-year",
+          "last-year",
+          "date-range",
+        ].map((tag) => (
+          <Button
+            key={tag}
+            colorScheme="green"
+            mt={"5px !important"}
+            size="sm"
+            variant={timeLine == tag ? "solid" : "outline"}
+            textTransform="capitalize"
+            onClick={() => setTimeLine(tag)}
+          >
+            {tag.replace("-", " ")}
+          </Button>
+        ))}
+      </HStack>
+
+      <AnalyticsComponent {...data} />
+      <HStack alignSelf="center" p={1} flexWrap="wrap">
+        {[
+          "all",
+          "avg",
+          "react",
+          "node",
+          "mongo-DB",
+          "dynamo-DB",
+        ].map((tag) => (
+          <Button
+            key={tag}
+            colorScheme="green"
+            mt={"5px !important"}
+            size="sm"
+            variant={timeLine == tag ? "solid" : "outline"}
+            textTransform="capitalize"
+            onClick={() => setTimeLine(tag)}
+          >
+            {tag.replace("-", " ")}
+          </Button>
+        ))}
+      </HStack>
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={chartOptionsCreator(data)}
+      />
+    </VStack>
   );
 }

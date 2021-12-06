@@ -8,17 +8,13 @@ import {
   Collapse,
   Icon,
   Popover,
-  PopoverTrigger,
   PopoverContent,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure,
   Avatar,
 } from "@chakra-ui/react";
 
 import {
-  HamburgerIcon,
-  CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";

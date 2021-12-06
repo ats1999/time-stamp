@@ -4,6 +4,21 @@ import CreatableSelect from "react-select/creatable";
 import axios from "axios";
 import Link from "next/link";
 
+const dot = (color = "transparent") => ({
+  alignItems: "center",
+  display: "flex",
+  color: "white",
+  ":before": {
+    backgroundColor: color,
+    borderRadius: 10,
+    content: '" "',
+    display: "block",
+    marginRight: 8,
+    height: 10,
+    width: 10,
+  },
+});
+
 export default function Tags() {
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,6 +66,30 @@ export default function Tags() {
             };
           })}
           isLoading={loading}
+          // https://react-select.com/home#custom-styles
+          styles={{
+            control: (styles) => ({ ...styles, backgroundColor: "black" }),
+            option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+              return {
+                ...styles,
+                backgroundColor: isSelected
+                  ? "#1f6300"
+                  : isFocused
+                  ? "#0b0236"
+                  : "black",
+                color: isDisabled ? "#ccc" : isSelected ? "gray" : "white",
+                ":active": {
+                  ...styles[":active"],
+                },
+              };
+            },
+            input: (styles) => ({ ...styles, ...dot() }),
+            placeholder: (styles) => ({ ...styles, ...dot("#ccc") }),
+            singleValue: (styles, { data }) => ({
+              ...styles,
+              ...dot(data.color),
+            }),
+          }}
         />
       </LightMode>
 

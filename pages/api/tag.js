@@ -12,7 +12,7 @@ export default async function tag(req, res) {
   if (req.method === "POST") {
     await User.findOneAndUpdate(
       { _id: userId },
-      { $push: { tags: req.body.tag } }
+      { $push: { tags: req.body.tag?.toLowerCase() } }
     );
     res.send("OK");
   } else {
