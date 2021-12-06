@@ -65,6 +65,14 @@ You will see UI
 
 You can enter the time spent in minutes, and select the date.
 
+## Analytics 📈
+The [analytics](https://time-stamp.vercel.app/analytics-360) page will have the record from the day you started. Some stats are present on this page. 
+
+![analytic page](https://user-images.githubusercontent.com/54087826/144704771-d96a1eda-5469-4b82-9ad7-2da75ece34ba.png)
+
+In the above image has my data, you can see I have a record of a total of 17 days, 78.74 hours and 4.63 avg hours each day.
+
+The chart contains the data for each day. 
 ## Contributing
 Any kind of contribution is welcomed, either a feature, bug or code contribution. 
 
@@ -91,6 +99,14 @@ npm run dev
 ```
 
 Open - <http://localhost:3000>
+
+### Upcoming feature that you can work on
+On [this](https://time-stamp.vercel.app/analytics-360) page
+- Implement a feature for users to select a date range
+- Allow users to see records of the current month, week, year (TAB - click)
+- Show compare results from last week to the current week, last year to current year, etc.
+- Suggest any feature
+
 ### Issues
 To contribute, you can go through the list of [issues](https://github.com/ats1999/time-stamp/issues) or create your own [issue](https://github.com/ats1999/time-stamp/issues/new).
 
