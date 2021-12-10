@@ -30,8 +30,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         </Layout>
       </SessionProvider>
     </ChakraProvider>
-  );
 </>
+  )
 }
 
 export default MyApp;
