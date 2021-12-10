@@ -1,4 +1,5 @@
 import { Heading, VStack } from "@chakra-ui/react";
+import Head from "next/head";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
@@ -125,6 +126,16 @@ export default function Analytics() {
   }, []);
 
   return (
+    <>
+    <Head>
+        <title>@time-stamp - your hand crafter time analysis :)</title>
+        <meta property={"og:title"} content={"@time-stamp - your hand crafter time analysis :)"} />
+       <meta
+          property="og:description"
+          content={"https://user-images.githubusercontent.com/54087826/145572545-2b84f8a2-9c31-4dfe-bfc8-4a69580336ea.png"}
+        />
+    
+    </Head>
     <VStack alignItems="left">
       <Heading textAlign="center">Your time analytics</Heading>
       <AnalyticsComponent {...data} />
@@ -132,6 +143,6 @@ export default function Analytics() {
         highcharts={Highcharts}
         options={chartOptionsCreator(data)}
       />
-    </VStack>
+    </VStack> </>
   );
 }
