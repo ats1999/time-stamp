@@ -2,7 +2,7 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
+  Container,
   Tr,
   Th,
   Td,
@@ -38,7 +38,7 @@ function TagAnalytics({ tag, timeSeries }) {
       : 0;
   return (
     <Tr>
-      <Td>{tag}</Td>
+      <Td textTransform={"capitalize"}>{tag}</Td>
       <Td>{analytics.numDays}</Td>
       <Td>{analytics.numHours.toFixed(2)}</Td>
       <Td>{avgHours}</Td>
@@ -47,21 +47,23 @@ function TagAnalytics({ tag, timeSeries }) {
 }
 export default function Analytics360TagTable({ data }) {
   return (
-    <Table variant="simple">
-      <TableCaption>Time according to your tags</TableCaption>
-      <Thead>
-        <Tr>
-          <Th>Tag</Th>
-          <Th>No. Days</Th>
-          <Th>No. Hours</Th>
-          <Th>Avg Hours</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {data?.tags.map((tag) => (
-          <TagAnalytics key={tag} tag={tag} timeSeries={data.timeSeries} />
-        ))}
-      </Tbody>
-    </Table>
+    <Container h="100px" w="100%" maxW={"100%"}>
+      <Table variant="striped" size='sm' placement="top">
+        <TableCaption>Time according to your tags</TableCaption>
+        <Thead>
+          <Tr>
+            <Th>Tag</Th>
+            <Th>No. Days</Th>
+            <Th>No. Hours</Th>
+            <Th>Avg Hours</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {data?.tags.map((tag) => (
+            <TagAnalytics key={tag} tag={tag} timeSeries={data.timeSeries} />
+          ))}
+        </Tbody>
+      </Table>
+    </Container>
   );
 }
