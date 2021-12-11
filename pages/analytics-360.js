@@ -130,7 +130,7 @@ export default function Analytics() {
   return (
     <VStack alignItems="left">
       <Heading textAlign="center">Your time analytics</Heading>
-      <HStack alignSelf="center" p={1} flexWrap="wrap">
+      {/* <HStack alignSelf="center" p={1} flexWrap="wrap">
         {[
           "all",
           "this-week",
@@ -153,10 +153,10 @@ export default function Analytics() {
             {tag.replace("-", " ")}
           </Button>
         ))}
-      </HStack>
+      </HStack> */}
 
       <AnalyticsComponent {...data} />
-      <HStack alignSelf="center" p={1} flexWrap="wrap">
+      {/* <HStack alignSelf="center" p={1} flexWrap="wrap">
         {["all", "avg", "react", "node", "mongo-DB", "dynamo-DB"].map((tag) => (
           <Button
             key={tag}
@@ -170,7 +170,7 @@ export default function Analytics() {
             {tag.replace("-", " ")}
           </Button>
         ))}
-      </HStack>
+      </HStack> */}
       <HighchartsReact
         highcharts={Highcharts}
         options={chartOptionsCreator(data)}
