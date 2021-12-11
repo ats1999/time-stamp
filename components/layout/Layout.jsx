@@ -11,22 +11,24 @@ import {
   useColorModeValue,
   useDisclosure,
   Avatar,
+  HStack,
+  IconButton,
+  useColorMode
 } from "@chakra-ui/react";
 
-import {
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from "@chakra-ui/icons";
+import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import { CgDarkMode } from "react-icons/cg";
 
 export default function WithSubnavigation({ children }) {
   const { isOpen, onToggle } = useDisclosure();
+  const { toggleColorMode } = useColorMode();
   const session = useSession();
   return (
     <Box>
-      <Box mx="auto" m={2}>
+      <HStack mx="auto" m={2}>
         {session?.data ? (
           <Link href="/">
             <a>
@@ -52,8 +54,14 @@ export default function WithSubnavigation({ children }) {
             Sign In
           </Button>
         )}
-        45
-      </Box>
+        <IconButton
+          variant="unstyled"
+          onClick={toggleColorMode}
+          icon={<Icon as={CgDarkMode} />}
+          fontSize="xx-large"
+          mt="-10px"
+        />
+      </HStack>
 
       {children}
     </Box>

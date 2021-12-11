@@ -36,12 +36,11 @@ function TagAnalytics({ tag, timeSeries }) {
     analytics.numHours > 0
       ? (analytics.numHours / analytics.numDays).toFixed(2)
       : 0;
-  console.log(tag, analytics);
   return (
     <Tr>
       <Td>{tag}</Td>
       <Td>{analytics.numDays}</Td>
-      <Td>{analytics.numHours}</Td>
+      <Td>{analytics.numHours.toFixed(2)}</Td>
       <Td>{avgHours}</Td>
     </Tr>
   );
