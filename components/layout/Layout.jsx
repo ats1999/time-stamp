@@ -2,7 +2,6 @@ import {
   Box,
   Flex,
   Text,
-  IconButton,
   Button,
   Stack,
   Collapse,
@@ -53,6 +52,7 @@ export default function WithSubnavigation({ children }) {
             Sign In
           </Button>
         )}
+        45
       </Box>
 
       {children}
