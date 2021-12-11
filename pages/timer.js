@@ -25,7 +25,10 @@ export default function Timer() {
         timerRef.current.pause();
         setPaused(true);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        alert(err?.response?.data || "Internal Server Error :)");
+      })
       .finally(() => setSubmitIng(false));
   };
 

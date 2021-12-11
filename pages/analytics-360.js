@@ -123,7 +123,7 @@ export default function Analytics() {
       })
       .catch((err) => {
         console.log(err);
-        alert("Server error");
+        alert(err?.response?.data || "Internal Server Error :)");
       });
   }, []);
 
@@ -157,14 +157,7 @@ export default function Analytics() {
 
       <AnalyticsComponent {...data} />
       <HStack alignSelf="center" p={1} flexWrap="wrap">
-        {[
-          "all",
-          "avg",
-          "react",
-          "node",
-          "mongo-DB",
-          "dynamo-DB",
-        ].map((tag) => (
+        {["all", "avg", "react", "node", "mongo-DB", "dynamo-DB"].map((tag) => (
           <Button
             key={tag}
             colorScheme="green"

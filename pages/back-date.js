@@ -29,8 +29,11 @@ export default function BackDate() {
       })
       .then((res) => {
         alert("Updated successfully");
+        alert(err?.response?.data || "Internal Server Error :)");
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+      })
       .finally(() => setSubmitIng(false));
   };
 
