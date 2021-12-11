@@ -28,7 +28,10 @@ export default function Tags() {
     axios
       .get("/api/tag")
       .then((res) => setTags(res.data))
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        alert(err?.response?.data || "Internal Server Error :)");
+      })
       .finally(() => setLoading(false));
   }, []);
 
