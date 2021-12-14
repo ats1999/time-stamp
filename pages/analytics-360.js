@@ -13,13 +13,65 @@ import { highChartsTheme } from "lib/util";
 Highcharts.theme = highChartsTheme;
 if (typeof Highcharts === "object") Highcharts.setOptions(Highcharts.theme);
 
-const chartOptionsCreator = (data,type="spline") => {
+const createCategoriesSpline = (data) => {
+  return (
+    data?.timeSeries.map((timer) => new Date(timer.timeStamp).toDateString()) ||
+    []
+  );
+};
+
+const createCategoriesColumn = (data) => {
+  return data?.tags || [];
+};
+
+const createDataSpline = (data) => {
+  return (
+    data?.tags.map((tag) => {
+      return {
+        name: tag,
+        marker: {
+          symbol: "square",
+        },
+        data: data.timeSeries.map((timer) => {
+          if (timer[tag] >= 5)
+            return {
+              y: timer[tag],
+              marker: {
+                symbol:
+                  "url(https://www.highcharts.com/samples/graphics/sun.png)",
+              },
+            };
+          return timer[tag];
+        }),
+      };
+    }) || []
+  );
+};
+
+const createDataColumn = (data) => {
+  const seriesValues =
+    data?.tags.map((tag) => {
+      return data.timeSeries.reduce((total, timer) => total + timer[tag], 0);
+    }) || [];
+  return [
+    {
+      name:"",
+      data:seriesValues
+    }
+  ]
+};
+const chartOptionsCreator = (
+  data,
+  createCategoriesSpline,
+  createDataSpline,
+  type = "spline"
+) => {
   const chartOptions = {
     chart: {
       height: 300,
       panning: true,
       followTouchMove: true,
-      type
+      type,
     },
     credits: {
       enabled: false,
@@ -31,10 +83,7 @@ const chartOptionsCreator = (data,type="spline") => {
       text: "Drag chart to see more :)",
     },
     xAxis: {
-      categories:
-        data?.timeSeries.map((timer) =>
-          new Date(timer.timeStamp).toDateString()
-        ) || [],
+      categories: createCategoriesSpline(data),
       min: 0,
       max: 7,
     },
@@ -89,26 +138,7 @@ const chartOptionsCreator = (data,type="spline") => {
       //   },
       // },
     },
-    series:
-      data?.tags.map((tag) => {
-        return {
-          name: tag,
-          marker: {
-            symbol: "square",
-          },
-          data: data.timeSeries.map((timer) => {
-            if (timer[tag] >= 5)
-              return {
-                y: timer[tag],
-                marker: {
-                  symbol:
-                    "url(https://www.highcharts.com/samples/graphics/sun.png)",
-                },
-              };
-            return timer[tag];
-          }),
-        };
-      }) || [],
+    series: createDataSpline(data),
   };
 
   return chartOptions;
@@ -148,13 +178,22 @@ export default function Analytics() {
         <AnalyticsComponent {...data} />
         <HighchartsReact
           highcharts={Highcharts}
-          options={chartOptionsCreator(data)}
+          options={chartOptionsCreator(
+            data,
+            createCategoriesSpline,
+            createDataSpline
+          )}
         />
         <HighchartsReact
           highcharts={Highcharts}
-          options={chartOptionsCreator(data,"column")}
+          options={chartOptionsCreator(
+            data,
+            createCategoriesColumn,
+            createDataColumn,
+            "column"
+          )}
         />
-        <Analytics360TagTable data={data}/>
+        <Analytics360TagTable data={data} />
       </VStack>{" "}
     </>
   );
