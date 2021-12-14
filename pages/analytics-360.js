@@ -13,13 +13,13 @@ import { highChartsTheme } from "lib/util";
 Highcharts.theme = highChartsTheme;
 if (typeof Highcharts === "object") Highcharts.setOptions(Highcharts.theme);
 
-const chartOptionsCreator = (data) => {
+const chartOptionsCreator = (data,type="spline") => {
   const chartOptions = {
     chart: {
-      type: "spline",
       height: 300,
       panning: true,
       followTouchMove: true,
+      type
     },
     credits: {
       enabled: false,
@@ -149,6 +149,10 @@ export default function Analytics() {
         <HighchartsReact
           highcharts={Highcharts}
           options={chartOptionsCreator(data)}
+        />
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={chartOptionsCreator(data,"column")}
         />
         <Analytics360TagTable data={data}/>
       </VStack>{" "}

@@ -47,8 +47,8 @@ function TagAnalytics({ numDays, numHours, avgHours, tag }) {
 
 const SortByArrow = ({ sortBy, descOrder, order }) => {
   if (order != sortBy) return null;
-  if (descOrder) return <ArrowDownIcon  w={6} h={6}  />;
-  else return <ArrowUpIcon  w={6} h={6}  />;
+  if (descOrder) return <ArrowDownIcon w={6} h={6} />;
+  else return <ArrowUpIcon w={6} h={6} />;
 };
 
 export default function Analytics360TagTable({ data }) {
@@ -101,7 +101,7 @@ export default function Analytics360TagTable({ data }) {
         <Thead>
           <Tr>
             <Th>Tag</Th>
-            <Th onClick={() => setOrder("numDays")}>
+            <Th cursor="pointer" onClick={() => setOrder("numDays")}>
               No. Days{" "}
               <SortByArrow
                 sortBy={sortBy}
@@ -109,7 +109,7 @@ export default function Analytics360TagTable({ data }) {
                 order={"numDays"}
               />
             </Th>
-            <Th onClick={() => setOrder("numHours")}>
+            <Th cursor="pointer" onClick={() => setOrder("numHours")}>
               No. Hours
               <SortByArrow
                 sortBy={sortBy}
@@ -117,7 +117,7 @@ export default function Analytics360TagTable({ data }) {
                 order={"numHours"}
               />
             </Th>
-            <Th onClick={() => setOrder("avgHours")}>
+            <Th cursor="pointer" onClick={() => setOrder("avgHours")}>
               Avg Hours{" "}
               <SortByArrow
                 sortBy={sortBy}
