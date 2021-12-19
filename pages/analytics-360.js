@@ -157,7 +157,6 @@ export default function Analytics() {
         alert(err?.response?.data || "Internal Server Error :)");
       });
   }, []);
-
   return (
     <>
       <Head>
