@@ -55,16 +55,19 @@ const createDataColumn = (data) => {
     }) || [];
   return [
     {
-      name:"",
-      data:seriesValues
-    }
-  ]
+      name: "",
+      data: seriesValues,
+    },
+  ];
 };
 const chartOptionsCreator = (
   data,
   createCategoriesSpline,
   createDataSpline,
-  type = "spline"
+  type = "spline",
+  max = 7,
+  title = "Your entire time track",
+  subtitle = "Drag chart to see more :)"
 ) => {
   const chartOptions = {
     chart: {
@@ -77,15 +80,15 @@ const chartOptionsCreator = (
       enabled: false,
     },
     title: {
-      text: "Your entire time track",
+      text: title,
     },
     subtitle: {
-      text: "Drag chart to see more :)",
+      text: subtitle,
     },
     xAxis: {
       categories: createCategoriesSpline(data),
       min: 0,
-      max: 7,
+      max: max,
     },
     yAxis: {
       title: {
@@ -180,7 +183,9 @@ export default function Analytics() {
           options={chartOptionsCreator(
             data,
             createCategoriesSpline,
-            createDataSpline
+            createDataSpline,
+            "spline",
+            7
           )}
         />
         <HighchartsReact
@@ -189,7 +194,10 @@ export default function Analytics() {
             data,
             createCategoriesColumn,
             createDataColumn,
-            "column"
+            "column",
+            null,
+            "",
+            ""
           )}
         />
         <Analytics360TagTable data={data} />
