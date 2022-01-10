@@ -21,6 +21,7 @@ import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import { CgDarkMode } from "react-icons/cg";
+import { AiFillGithub } from "react-icons/ai";
 
 export default function WithSubnavigation({ children }) {
   const { isOpen, onToggle } = useDisclosure();
@@ -61,6 +62,14 @@ export default function WithSubnavigation({ children }) {
           fontSize="xx-large"
           mt="-10px"
         />
+        <a href="https://github.com/ats1999/time-stamp" target="_blank">
+          <IconButton
+            variant="unstyled"
+            icon={<Icon as={AiFillGithub} />}
+            fontSize="xx-large"
+            mt="0px"
+          />
+        </a>
       </HStack>
 
       {children}
