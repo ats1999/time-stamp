@@ -85,20 +85,7 @@ The application is built using
 - Highcharts.js
 
 ### Install 
-```js
-git clone https://github.com/ats1999/time-stamp.git
-
-cd time-stamp
-
-npm i
-```
-
-### Start
-```js
-npm run dev
-```
-
-Open - <http://localhost:3000>
+https://github.com/ats1999/time-stamp/blob/main/docs/install.md
 
 ### Upcoming feature that you can work on
 On [this](https://time-stamp.vercel.app/analytics-360) page
