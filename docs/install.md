@@ -27,7 +27,8 @@ Now, you can get these value from here
 
 > Make sure to put this value in google OAuth console 
 
-![Screenshot from 2022-01-14 22-15-55](https://user-images.githubusercontent.com/54087826/149553235-9c806324-f464-48fa-aa9f-09910118165a.png)
+![Screenshot from 2022-01-15 07-00-57](https://user-images.githubusercontent.com/54087826/149603795-8292bf94-d6a4-482c-b298-97838925be1a.png)
+
 
 
 ## 3. Start the application
