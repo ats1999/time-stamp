@@ -33,3 +33,6 @@ Now, you can get these value from here
 
 ## 3. Start the application
 Type `npm run dev` in terminal
+
+## 4. Open the application 
+http://localhost:3000
