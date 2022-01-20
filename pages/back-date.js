@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import {
   VStack,
@@ -18,6 +18,7 @@ export default function BackDate() {
   const [submitIng, setSubmitIng] = useState(false);
   const [time, setTime] = useState(0);
   const [date, setDate] = useState(to_YY_MM_DD(new Date()));
+  const minutesInputRef = useRef(null);
 
   const submitTagTimer = () => {
     setSubmitIng(true);
@@ -29,6 +30,8 @@ export default function BackDate() {
       })
       .then((res) => {
         alert("Updated successfully");
+        minutesInputRef.current.value = '';
+        setTime('');
         alert(err?.response?.data || "Internal Server Error :)");
       })
       .catch((err) => {
@@ -57,6 +60,7 @@ export default function BackDate() {
       <Input
         onChange={(e) => setTime(e.target.value)}
         placeholder="minutes"
+        ref={minutesInputRef}
         w="100%"
         type="number"
       />
